@@ -2,6 +2,7 @@ package com.generation.game_store.controllers;
 
 import com.generation.game_store.dto.ProdutoDTO;
 import com.generation.game_store.services.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/produtos")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProdutoController {
 
     @Autowired
@@ -35,13 +37,13 @@ public class ProdutoController {
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoDTO> insertNewProduct(@RequestBody ProdutoDTO dto) {
+    public ResponseEntity<ProdutoDTO> insertNewProduct(@Valid @RequestBody ProdutoDTO dto) {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(produtoService.inserirNovoProduto(dto));
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ProdutoDTO> updateProduct(@PathVariable Long id, @RequestBody ProdutoDTO dto) {
+    public ResponseEntity<ProdutoDTO> updateProduct(@PathVariable Long id,@Valid @RequestBody ProdutoDTO dto) {
         return ResponseEntity.ok().body(produtoService.atualizarProduto(id, dto));
     }
 

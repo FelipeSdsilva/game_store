@@ -50,7 +50,7 @@ public class ProdutoService {
     }
 
     public List<ProdutoDTO> precosEntreValores(Double precoInicial, Double precoFinal){
-        return produtoRepository.searchByPreco(precoInicial,precoFinal).stream().map(ProdutoDTO::new).toList();
+        return produtoRepository.findAllByPriceContainingIgnoreCase(precoInicial,precoFinal).stream().map(ProdutoDTO::new).toList();
     }
 
     public void deletarProdutoPorId(Long id) {

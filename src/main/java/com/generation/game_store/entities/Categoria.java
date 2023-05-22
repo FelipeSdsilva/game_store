@@ -1,7 +1,10 @@
 package com.generation.game_store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.generation.game_store.dto.CategoriaDTO;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
@@ -15,10 +18,16 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
+    @Size
     private String tipo;
+
+    @NotBlank
+    @Size
     private String descricao;
 
     @OneToMany(mappedBy = "categoria")
+    @JsonIgnoreProperties
     private List<Produto> produtos = new ArrayList<>();
 
     public Categoria() {

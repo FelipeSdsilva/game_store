@@ -14,5 +14,5 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 			"tb_produto.descricao, tb_produto.platafor "+
 			"FROM tb_produto " +
 			"WHERE tb_produto.preco BETWEEN :precoInicial AND :precoFinal ")
-    List<ProdutoProjection> searchByPreco(Double precoInicial, Double precoFinal);
+    List<ProdutoProjection> findAllByPriceContainingIgnoreCase(Double precoInicial, Double precoFinal);
 }

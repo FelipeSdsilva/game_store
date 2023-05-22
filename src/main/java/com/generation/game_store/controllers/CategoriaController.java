@@ -2,6 +2,7 @@ package com.generation.game_store.controllers;
 
 import com.generation.game_store.dto.CategoriaDTO;
 import com.generation.game_store.services.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/categorias")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
@@ -35,13 +37,13 @@ public class CategoriaController {
 
 
     @PostMapping
-    public ResponseEntity<CategoriaDTO> insertNewProduct(@RequestBody CategoriaDTO dto){
+    public ResponseEntity<CategoriaDTO> insertNewProduct(@Valid @RequestBody CategoriaDTO dto){
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(categoriaService.inserirNovoCategoria(dto));
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CategoriaDTO> updateProduct(@PathVariable Long id, @RequestBody CategoriaDTO dto){
+    public ResponseEntity<CategoriaDTO> updateProduct(@PathVariable Long id, @Valid @RequestBody CategoriaDTO dto){
         return ResponseEntity.ok().body(categoriaService.atualizarCategoria(id,dto));
     }
 

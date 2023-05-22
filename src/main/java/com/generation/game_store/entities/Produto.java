@@ -1,6 +1,11 @@
 package com.generation.game_store.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -11,15 +16,31 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size
     private String name;
+
+    @NotNull
+    @Positive
     private Double preco;
+
+    @NotBlank
+    @Size
     @Column(columnDefinition = "TEXT")
     private String descricao;
+
+    @NotBlank
+    @Size
     private String imgUrl;
+
+    @NotBlank
+    @Size
     private String platafor;
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties
     private Categoria categoria;
 
     public Produto() {
