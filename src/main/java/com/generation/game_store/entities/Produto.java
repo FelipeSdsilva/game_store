@@ -43,6 +43,12 @@ public class Produto {
     @JsonIgnoreProperties
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    @JsonIgnoreProperties
+    private Usuario usuario;
+
+
     public Produto() {
     }
 
@@ -110,6 +116,14 @@ public class Produto {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
