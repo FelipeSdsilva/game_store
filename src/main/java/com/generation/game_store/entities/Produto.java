@@ -40,12 +40,12 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    @JsonIgnoreProperties
+    @JsonIgnoreProperties("categoria")
     private Categoria categoria;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
-    @JsonIgnoreProperties
+    @JsonIgnoreProperties("usuario")
     private Usuario usuario;
 
 

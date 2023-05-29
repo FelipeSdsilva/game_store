@@ -33,7 +33,7 @@ public class Usuario {
     private String foto;
 
     @OneToMany(mappedBy = "usuario")
-    @JsonIgnoreProperties
+    @JsonIgnoreProperties("produtos")
     private List<Produto> produtos = new ArrayList<>();
 
     public Usuario() {
