@@ -35,6 +35,11 @@ public class UsuarioService {
 
     public Optional<UsuarioDTO> cadastrarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
+        usuario.setNome(usuarioDTO.getNome());
+        usuario.setUsuario(usuarioDTO.getUsuario());
+        usuario.setSenha(criptografarSenha(usuarioDTO.getSenha()));
+        usuario.setFoto(usuarioDTO.getFoto());
+
         if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
             return Optional.empty();
 
@@ -68,7 +73,7 @@ public class UsuarioService {
                 usuarioLogin.get().setNome(usuario.get().getNome());
                 usuarioLogin.get().setFoto(usuario.get().getFoto());
                 usuarioLogin.get().setToken(gerarToken(usuario.get().getUsuario()));
-                usuarioLogin.get().setSenha("");
+                usuarioLogin.get().setSenha(usuario.get().getSenha());
 
                 return usuarioLogin;
             }
